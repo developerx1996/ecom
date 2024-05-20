@@ -1,0 +1,36 @@
+<div class="container mt-3">
+    <div class="text-center">
+       <h3><u>ITEMS IN ORDER</u></h3>
+    </div>
+    <table class="table mt-3">
+        <thead>
+            <tr>
+                <th></th>
+                <th><b>Item</b></th>
+                <th><b>Category</b></th>
+                <th><b>Price</b></th>
+                <th><b>Quantity</b></th>
+                <th><b>Description</b></th>
+            </tr>
+        </thead>
+        <tbody>
+           <tr>
+            {{#each orderedItems}}
+               <td><img src="/product-images/{{this.product._id}}.jpg"></td>
+               <td>{{this.product.name}}</td>
+               <td>{{this.product.category}}</td>
+               <td>{{this.product.price}}</td>
+               <td>{{this.quantity}}</td>
+               <td>{{this.product.description}}</td>
+           </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    <div class="text-md-end">
+    <a href="" class="btn btn-secondary">Cancel Order</a>
+    </div>
+</div>
+
+<style>
+
+</style>

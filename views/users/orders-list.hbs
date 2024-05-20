@@ -1,0 +1,46 @@
+<section>
+    <div class="container text-center ">
+
+     <h3>YOUR ORDERS</h3>
+
+        <table class="table mt-5">
+  <thead>
+    <tr>
+      <th scope="col">Date</th>
+      <th scope="col">Address</th>
+      <th scope="col">Pincode</th>
+      <th scope="col">Mobile</th>
+      <th scope="col"> Amount</th>
+      <th scope="col">Payment</th>
+      <th scope="col">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each orderList}}
+    <tr>
+      <th scope="row">{{this.date}}</th>
+      <td>{{this.deliveryDetails.address}}</td>
+      <td>{{this.deliveryDetails.pincode}}</td>
+      <td>{{this.deliveryDetails.mobile}}</td>
+      <td>{{this.amount}}</td>
+      <td>{{this.paymentMethod}}</td>
+      <td>{{this.status}}</td>
+      <td><a href="/view-products/{{this._id}}" class="btn btn-primary btn-sm w-75">view items</a></td>
+      <td><a href="/cancel-product" class="btn btn-secondary btn-sm w-75">Cancel order</td>
+    </tr>
+     {{/each}}
+
+  </tbody>
+</table>
+    </div>
+</section>
+
+<style>
+    .btn{
+        width: 120px;
+    }
+    .row{
+        display: flex;
+        justify-content: flex-end;
+    }
+</style>

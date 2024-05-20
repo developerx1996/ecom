@@ -1,0 +1,86 @@
+<section>
+    <div class="container">
+        <table class="table mt-5">
+            <thead>
+                <tr>
+                    <th>item</th>
+                    <th>Title</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each products}}
+                <tr>
+                    <td><img style="width:80px;height:80px" src="/product-images/{{this.product._id}}.jpg" ></td>
+                    <td>{{this.product.name}}</td>
+                    <td>{{this.product.price}}</td>
+                  
+                    <td>
+                        <button class="cart-item-count"
+                            onclick="changeQuantity('{{this._id}}','{{this.product._id}}',-1)">-</button>
+                            <span id="itemCount{{this.product._id}}">{{this.quantity}}</span>
+                         <button class="cart-items-count" 
+                            onclick="changeQuantity('{{this._id}}','{{this.product._id}}',1)">+</button>
+                    </td>
+                    <td>
+                        <a  class="btn btn-danger" 
+                          onclick="removeItem('{{this._id}}','{{this.product._id}}')">Remove</a>
+                    </td>
+                
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+    <hr>
+    <div class="" style="text-align: right; padding-right: 7rem;" >
+       <h5><b>TOTAL= <span id="total"> {{total}}</span>/-</b></h5>
+      <a class="btn btn-success" href="/place-order"   style="width: 13%;" >Check Out</a>
+    </div>
+</section>
+
+<script>
+    function changeQuantity(cartItem,proId,count){
+     let   quantity=document.getElementById('itemCount'+proId).innerHTML
+    $.ajax({
+        url:'/change-product-quantity',
+        data:{
+            cart:cartItem,
+            product:proId,
+            count:count,
+            quantity:quantity,
+        },
+            method: 'post',
+            success:function(response){
+         if(response.removed)
+         { location.reload()}
+         else {
+         let change=response.count
+        let count=$('#itemCount'+proId).html()
+        count=parseInt(count)+change
+        $('#itemCount'+proId).html(count)
+        $('#total').html(response.total)
+      }
+        }
+    });
+    };
+
+    function removeItem(cartId,proId){
+    if(confirm("are you deleting this item?")){
+    $.ajax({
+       url:'/remove-item',
+       data:{
+         cart:cartId,
+         product:proId
+       },
+         method:'post',
+         success:function(response){
+            if(response){
+                location.reload()
+            }
+         }
+    })
+    } 
+    }
+</script>
