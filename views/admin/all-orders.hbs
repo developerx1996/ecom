@@ -1,0 +1,42 @@
+
+<section>
+  <div class="container mt-1">
+    <div class="row">
+        <div class="text-center">
+            <h3><u>ALL PLACED ORDERS</u></h3>
+        </div>
+        <div>
+            <table class="table mt-3">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Time</th>
+                        <th>user</th>
+                        <th>orderID</th>
+                        <th>Amount</th>
+                        <th>payment</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    <tbody>
+      
+                      {{#each allOrders}}
+                      <tr>
+                        <td scope="row">1</td>
+                        <td>{{this.date}}</td>
+                        <td>{{this.userId}}</td>
+                        <td>{{this._id}}</td>
+                        <td>{{this.amount}}</td>
+                        <td>{{this.paymentMethod}}</td>
+                        <td><a class="btn btn-secondary" href="">View Items</a></td>
+                        <td><a class="btn btn-success">Shipped</a></td>
+                      </tr>
+                      {{/each}}
+
+                    </tbody>
+                </thead>
+            </table>
+        </div>
+    </div>
+  </div>
+</section>

@@ -46,5 +46,29 @@ module.exports={
             })
         })
     },
+    verifyAdmin:(adminData)=>{
+       return new Promise(async(resolve,reject)=>{
+        let admin= await db.get().collection(collection.ADMINLOGIN_COLLECTION).findOne({username:adminData.username})
+         if(admin){ 
+        if(adminData.password === admin.password){
+         resolve(true)
+         }else{
+            resolve(false)
+         }
+        }else{
+            resolve(false)
+        }
+       })
+    },
+
+    getAllOrders:()=>{
+         return new Promise(async(resolve,reject)=>{
+            let allOrders=await db.get().collection(collection.ORDER_COLLECTION)
+                 .find({status:"placed"}).toArray()
+                 
+            resolve(allOrders)
+         })
+         
+    }
 
 }

@@ -20,11 +20,21 @@
             <a class="nav-link" href="/admin/products">All Products <span class="sr-only"></span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">All Orders</a>
+            <a class="nav-link" href="/admin/all-orders">All Orders</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">All Users</a>
           </li>
+          <li class="nav-item">
+            <br>
+            <a class="btn btn-primary pl-1">{{this.adminName}}</a>
+          </li>
+          {{#if adminName}}
+          <li class="nav-item">
+            <br>
+            <a class="btn btn-warning pl-1">Logout</a>
+          </li>
+          {{/if}}
         </ul>
       </div>
       <div class="container justify-content-end">

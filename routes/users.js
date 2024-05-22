@@ -39,7 +39,7 @@ router.get('/login',function(req,res){
 router.get('/signup',(req,res)=>{
     res.render('users/signup')
 })
-router.post('/signup',(req,res)=>{
+router.post('/signup',(req,res)=>{ 
        userHelper.doSignup(req.body).then((response)=>{  
             req.session.loggedIn=true
             req.session.user=response
@@ -102,7 +102,7 @@ router.post('/remove-item',(req,res)=>{
 router.get('/place-order',verifyLogin, async (req,res)=>{
     console.log("GOING TO CALL DELIVERY DETAILS")
     let total= await userHelper.getTotalAmount(req.session.user._id)
-    res.render('users/place-order',{total})
+    res.render('users/place-order',{total,user:req.session.user})
 })
 
 router.post('/place-order', async(req,res)=>{
@@ -124,12 +124,12 @@ router.post('/place-order', async(req,res)=>{
 })
 
 router.get('/order-placed',(req,res)=>{
-    res.render('users/order-conformed')
+    res.render('users/order-conformed',{user:req.session.user})
 })
  
 router.get('/orders-list',verifyLogin,(req,res)=>{
     userHelper.getOrderList(req.session.user._id).then((orderList)=>{
-    res.render('users/orders-list',{orderList})
+    res.render('users/orders-list',{orderList,user:req.session.user})
     })
 });
 
